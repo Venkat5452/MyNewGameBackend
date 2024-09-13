@@ -192,15 +192,7 @@ server.post("/resetpassword",async(req,res)=>{
   otpdata.findOne({email:email}).then((user)=>{
     if(user) {
       if(user.otp===otp) {
-        User.findOne({email:email}).then((user1)=>{
-          if(user1){
-            user1.password=password;
-            user1.save().then(res.send("SuccessFull"));
-          }
-          else {
-            res.send("Something went Wrong");
-          }
-        })
+        res.send("SuccessFull")
       }
       else {
         res.send("Incorrect OTP");
@@ -212,6 +204,18 @@ server.post("/resetpassword",async(req,res)=>{
   })
 })
 
+server.post("/setpassword",(req,res)=>{
+  const {email,password}=req.body;
+  User.findOne({email:email}).then((user)=>{
+    if(user) {
+      user.password=password;
+      user.save().then(res.send("SuccessFull"));
+    }
+    else {
+      res.send("Something went wrong");
+    }
+  })
+})
 server.get("/getName/:email",(req,res)=>{
   const {email}=req.params;
   //console.log(email);
