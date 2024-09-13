@@ -246,6 +246,6 @@ server.post("/getalldetails",async(req,res)=>{
   
   res.send({records});
 })
-server.listen((9006),()=>{
-    console.log("server is running in 9006.");
+server.listen((9009),()=>{
+    console.log("server is running in 9009.");
 })
